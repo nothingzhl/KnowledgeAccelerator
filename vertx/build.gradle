@@ -1,0 +1,9 @@
+dependencies {
+    String osName = System.getProperty("os.name").toLowerCase();
+
+    testImplementation "io.vertx:vertx-junit5"
+    implementation 'io.vertx:vertx-core'
+    if (osName.contains("mac")) {
+        implementation "io.netty:netty-resolver-dns-native-macos"
+    }
+}

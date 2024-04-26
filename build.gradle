@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.rainbow'
+version = '1.0-SNAPSHOT'
+
+
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+
+    ext {
+        junitVersion = '5.8.1'
+        vertxVersion = '4.5.7'
+        nettyDnsVersion = '4.1.109.Final'
+        vertxJUnitVersion = '4.5.7';
+    }
+
+    dependencies {
+        constraints {
+            testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+            testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+            implementation "io.vertx:vertx-core:${vertxVersion}"
+            implementation "io.netty:netty-resolver-dns-native-macos:${nettyDnsVersion}"
+            testImplementation "io.vertx:vertx-junit5:${vertxJUnitVersion}"
+        }
+        testImplementation 'org.junit.jupiter:junit-jupiter-api'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
